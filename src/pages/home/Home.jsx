@@ -1,5 +1,4 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
 import AppDrawer from '../../components/drawer/AppDrawer'
 
 import AuthenticatedNavbar from '../../components/navbar/AuthenticatedNavbar'
@@ -7,6 +6,7 @@ import TasksFilter from '../../components/tasksFilters/TasksFilter'
 import AddTasksFilter from '../../components/tasksFilters/AddTasksFilter'
 import AddTask from '../../components/tasks/AddTask'
 import Tasks from '../../components/tasks/Tasks'
+import ShowTask from '../../components/tasks/ShowTask'
 
 
 export default function Home() {
@@ -15,16 +15,9 @@ export default function Home() {
 
   const [openFilterDrawer, setOpenFilterDrawer] = React.useState(false)
 
-
-  const history = useHistory()
-
   return (
     <div>
       <AuthenticatedNavbar onOpenDrawer={() => setOpenDrawer(!openDrawer)} />
-      {/* <AppDrawer
-        openDrawer={openDrawer}
-        onToggleDrawer={(val) => setOpenDrawer(val)}
-      /> */}
       <AppDrawer
         openDrawer={openFilterDrawer}
         onToggleDrawer={(val) => setOpenFilterDrawer(val)}
@@ -57,11 +50,7 @@ export default function Home() {
             />
           }
         >
-          <button onClick={() => setOpenTasksDrawer(!openTasksDrawer)}>
-            open tasks
-          </button>
-          Home
-          <button onClick={() => history.push('/login')}>login</button>
+          <ShowTask />
         </AppDrawer>
       </AppDrawer>
     </div>

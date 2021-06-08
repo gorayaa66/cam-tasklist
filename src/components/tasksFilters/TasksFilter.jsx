@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   list_item: {
     display: 'flex',
     flexDirection: 'row-reverse',
+    '&:hover': {
+      borderLeft: '2px solid blue',
+    },
   },
 }))
 

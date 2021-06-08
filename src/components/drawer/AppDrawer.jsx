@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     // padding: theme.spacing(3),
-    marginTop: '64px',
+    marginTop: '44px',
   },
   list_item: {
     display: 'flex',
@@ -104,7 +104,6 @@ export default function AppDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-
       <Drawer
         variant='permanent'
         className={clsx(classes.drawer, {
@@ -127,7 +126,7 @@ export default function AppDrawer(props) {
         <Divider />
         {content}
 
-        <Divider />
+        {openDrawer && <Divider />}
       </Drawer>
       <main className={classes.content}>{children}</main>
     </div>
