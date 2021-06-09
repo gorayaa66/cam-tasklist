@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import CloseIcon from '@material-ui/icons/Close'
@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+    },
   },
   list_item: {
     display: 'flex',
@@ -35,31 +39,86 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       color: 'blue',
     },
+    [theme.breakpoints.down('md')]: {
+      fontSize: '12px'
+    },
+  },
+  icon: {
+    fontSize: '5px',
   },
   close: {
-    fonrSize: '12px',
+    fontSize: '12px',
     cursor: 'pointer',
+    '&:hover': {
+      color: 'blue',
+    },
+    margin: '0px 5px',
   },
   btn_row: {
     display: 'flex',
     justifyContent: 'space-between',
-    margin: '20px 0px'
+    margin: '20px 0px',
+    [theme.breakpoints.down('sm')]: {
+      flexWrap: 'wrap',
+      maxWidth: '200px',
+    },
+  },
+  tabs_cont: {
+    display: 'flex',
+    alignItems: 'center',
+    margin: '10px 0px',
+  },
+  tab: {
+    cursor: 'pointer',
+    fontSize: '16px',
+    margin: '0px 10px',
+    padding: '0px 10px',
+    minWidth: '60px',
+    height: '28px',
+    display: 'flex',
+    justifyContent: 'center',
+    '&:hover': {
+      borderBottom: '2px solid blue',
+    },
+  },
+  selected_tab: {
+    cursor: 'pointer',
+    fontSize: '16px',
+    margin: '0px 10px',
+    padding: '0px 10px',
+    minWidth: '60px',
+    display: 'flex',
+    height: '28px',
+    justifyContent: 'center',
+    borderBottom: '2px solid red',
   },
 }))
 
 export default function ShowTask() {
   const classes = useStyles()
+  const [selectedTab, setSelectedTab] = useState('Form')
   return (
     <div className={classes.task_container}>
       <TaskHeader />
       <div className={classes.btn_row}>
-        <LinkButton text={'Set follow-up date'} icon={<TodayIcon />} />
+        <LinkButton  text={'Set follow-up date'} icon={<TodayIcon/>} />
         <LinkButton text={'Set due date'} icon={<NotificationsIcon />} />
         <LinkButton text={'Set follow-up date'} icon={<AppsIcon />} />
-        <LinkButton text={'Set follow-up date'} icon={<PersonIcon />} close />
+        <LinkButton text={'username'} icon={<PersonIcon />} close />
       </div>
+      <TaskTabs selectedTab={selectedTab} onSelectTab={tab => setSelectedTab(tab)} />
     </div>
   )
+}
+
+const TaskTabs = (props) => {
+    const classes = useStyles()
+    const { selectedTab, onSelectTab } = props
+    return (
+        <div className={classes.tabs_cont}>
+            {['Form', 'History', 'Diagram', 'Description'].map((tab) => <div className={selectedTab === tab? classes.selected_tab :classes.tab} onClick={() => onSelectTab(tab)}>{tab}</div>)}
+        </div>
+    )
 }
 
 const LinkButton = (props) => {
