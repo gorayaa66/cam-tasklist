@@ -141,7 +141,7 @@ export default function AddTasksFilter(props) {
   return (
     <>
       <List className={openFilterDrawer ? classes.list : {}}>
-        {[{ title: 'Create a filter', icon: <Add /> }].map(
+        {openFilterDrawer && [{ title: 'Create a filter', icon: <Add /> }].map(
           ({ title, icon }, index) => (
             <ListItem
               className={classes.list_item}
@@ -163,7 +163,9 @@ export default function AddTasksFilter(props) {
       <AppModal
         openModal={openAddFilterModal}
         toggleModal={(val) => setOpenAddFilterModal(val)}
-      ><AddFilterForm onClose={() => setOpenAddFilterModal(false)}/></AppModal>
+      >
+        <AddFilterForm onClose={() => setOpenAddFilterModal(false)} />
+      </AppModal>
     </>
   )
 }

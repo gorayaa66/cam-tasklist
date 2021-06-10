@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
+    marginRight: '3px',
   },
   drawerOpen: {
     width: drawerWidth,
@@ -58,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     left: 'auto',
+    boxShadow: '5px 0 5px -2px #eee',
   },
   drawerClose: {
     transition: theme.transitions.create('width', {
@@ -66,7 +68,9 @@ const useStyles = makeStyles((theme) => ({
     }),
     overflowX: 'hidden',
     left: 'auto',
-    width: theme.spacing(7) + 1,
+    // width: theme.spacing(7) + 1,
+    maxWidth: '40px',
+    boxShadow: '5px 0 5px -2px #eee',
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
     },
@@ -74,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
@@ -83,11 +87,15 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     // padding: theme.spacing(3),
-    marginTop: '44px',
+    marginTop: '10px',
   },
   list_item: {
     display: 'flex',
     flexDirection: 'row-reverse',
+  },
+  icon: {
+    height: '10px',
+    width: '10px',
   },
 }))
 
@@ -119,7 +127,7 @@ export default function AppDrawer(props) {
       >
         <div className={classes.toolbar}>
           {head}
-          <IconButton onClick={handleDrawerToggle}>
+          <IconButton onClick={handleDrawerToggle} className={!openDrawer?classes.icon:{}}>
             {!openDrawer ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>

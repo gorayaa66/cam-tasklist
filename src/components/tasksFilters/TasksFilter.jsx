@@ -7,7 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Edit from '@material-ui/icons/Edit'
 import { makeStyles } from '@material-ui/core/styles'
 
-
 const useStyles = makeStyles((theme) => ({
   edit: {
     display: 'flex',
@@ -29,31 +28,39 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function TasksFilter(props) {
-    const { openFilterDrawer, toggleFilterDrawer } = props
-    const classes = useStyles()
+  const { openFilterDrawer, toggleFilterDrawer } = props
 
-    return (
-      <List>
-        {['All Tasks (9)', 'Filter 1', 'Filter 2'].map((text, index) => (
-          <ListItem
-            button
-            key={index}
-            className={openFilterDrawer ? classes.list_item : {}}
-          >
-            <ListItemIcon
-              className={classes.edit}
-              onClick={() => alert('yes')}
-              onKeyDown={() => alert('yes')}
-            >
-              <Edit />
-            </ListItemIcon>
-            <ListItemText
-              primary={text}
-              onClick={() => toggleFilterDrawer(!openFilterDrawer)}
-              onKeyDown={() => toggleFilterDrawer(!openFilterDrawer)}
-            />
-          </ListItem>
-        ))}
-      </List>
-    )
+  return (
+    <List>
+      {['All Tasks (9)', 'Filter 1', 'Filter 2'].map((text, index) => (
+        <TaskFilterListItem
+          key={index}
+          openFilterDrawer={openFilterDrawer}
+          toggleFilterDrawer={toggleFilterDrawer}
+          text={text}
+        />
+      ))}
+    </List>
+  )
+}
+
+const TaskFilterListItem = (props) => {
+  const { openFilterDrawer, toggleFilterDrawer, text } = props
+  const classes = useStyles()
+  return (
+    <ListItem button className={openFilterDrawer ? classes.list_item : {}}>
+      <ListItemIcon
+        className={classes.edit}
+        onClick={() => alert('yes')}
+        onKeyDown={() => alert('yes')}
+      >
+        {openFilterDrawer && <Edit />}
+      </ListItemIcon>
+      <ListItemText
+        primary={text}
+        onClick={() => toggleFilterDrawer(!openFilterDrawer)}
+        onKeyDown={() => toggleFilterDrawer(!openFilterDrawer)}
+      />
+    </ListItem>
+  )
 }

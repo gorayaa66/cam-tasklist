@@ -10,9 +10,14 @@ const theme = createMuiTheme({
   status: {
     danger: red[500],
   },
-//   palette: {
-//       primary: red
-//   }
+  typography: {
+    button: {
+      textTransform: 'none',
+    },
+  },
+  //   palette: {
+  //       primary: red
+  //   }
 })
 
 export default function Theme({ children }) {

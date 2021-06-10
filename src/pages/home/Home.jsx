@@ -1,8 +1,5 @@
 import React, {useState} from 'react'
 import AppDrawer from '../../components/drawer/AppDrawer'
-
-
-import AuthenticatedNavbar from '../../components/navbar/AuthenticatedNavbar'
 import TasksFilter from '../../components/tasksFilters/TasksFilter'
 import AddTasksFilter from '../../components/tasksFilters/AddTasksFilter'
 import AddTask from '../../components/tasks/AddTask'
@@ -11,13 +8,11 @@ import ShowTask from '../../components/tasks/ShowTask'
 
 
 export default function Home() {
-  const [openDrawer, setOpenDrawer] = useState(false)
-  const [openTasksDrawer, setOpenTasksDrawer] = useState(false)
-  const [openFilterDrawer, setOpenFilterDrawer] = useState(false)
+  const [openTasksDrawer, setOpenTasksDrawer] = useState(true)
+  const [openFilterDrawer, setOpenFilterDrawer] = useState(true)
 
   return (
     <div>
-      <AuthenticatedNavbar onOpenDrawer={() => setOpenDrawer(!openDrawer)} />
       <AppDrawer
         openDrawer={openFilterDrawer}
         onToggleDrawer={(val) => setOpenFilterDrawer(val)}

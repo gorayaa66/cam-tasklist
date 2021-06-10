@@ -4,16 +4,15 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import InputBase from '@material-ui/core/InputBase'
 import Badge from '@material-ui/core/Badge'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
-import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from '@material-ui/icons/Search'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import MailIcon from '@material-ui/icons/Mail'
-import NotificationsIcon from '@material-ui/icons/Notifications'
 import MoreIcon from '@material-ui/icons/MoreVert'
+import TelegramIcon from '@material-ui/icons/Telegram'
+import AssignmentIcon from '@material-ui/icons/Assignment'
+import { Button, Tooltip } from '@material-ui/core'
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -80,10 +79,20 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  overdue: {
+    color: 'red'
+  },
+  three_days: {
+    color: 'yellow'
+  },
+  notdue: {
+    color: 'green'
+  }
 }))
 
 export default function AuthenticatedNavbar(props) {
-  const { onOpenDrawer } = props
+  // const { onOpenDrawer } = props
+  const history = useHistory()
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -136,20 +145,31 @@ export default function AuthenticatedNavbar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
+        <p>Start process</p>
+      </MenuItem>
+      <MenuItem>
         <IconButton aria-label='show 4 new mails' color='inherit'>
           <Badge badgeContent={4} color='secondary'>
-            <MailIcon />
+            <AssignmentIcon className={classes.overdue} />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Overdue</p>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label='show 11 new notifications' color='inherit'>
           <Badge badgeContent={11} color='secondary'>
-            <NotificationsIcon />
+            <AssignmentIcon className={classes.three_days} />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Due within 48 hours</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton aria-label='show 11 new notifications' color='inherit'>
+          <Badge badgeContent={11} color='secondary'>
+            <AssignmentIcon className={classes.notdue} />
+          </Badge>
+        </IconButton>
+        <p>Not due yet</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -167,21 +187,22 @@ export default function AuthenticatedNavbar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position='absolute' className={classes.appBar} >
+      <AppBar position='absolute' className={classes.appBar}>
         <Toolbar>
           <IconButton
             edge='start'
             className={classes.menuButton}
             color='inherit'
             aria-label='open drawer'
-            onClick={() => onOpenDrawer()}
+            onClick={() => history.push('/')}
           >
-            <MenuIcon />
+            <TelegramIcon />
           </IconButton>
           <Typography className={classes.title} variant='h6' noWrap>
             Tasklist
           </Typography>
-          <div className={classes.search}>
+
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -193,18 +214,35 @@ export default function AuthenticatedNavbar(props) {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+          </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <Button color='inherit' onClick={() => history.push("/process/list")}>
+                Start process
+            </Button>
             <IconButton aria-label='show 4 new mails' color='inherit'>
-              <Badge badgeContent={4} color='secondary'>
-                <MailIcon />
-              </Badge>
+              <Tooltip title='Overdue tasks' aria-label='Overdue tasks'>
+                <Badge badgeContent={4} color='secondary'>
+                  <AssignmentIcon className={classes.overdue} />
+                </Badge>
+              </Tooltip>
             </IconButton>
             <IconButton aria-label='show 17 new notifications' color='inherit'>
-              <Badge badgeContent={17} color='secondary'>
-                <NotificationsIcon />
-              </Badge>
+              <Tooltip
+                title='Due within 48 hours tasks'
+                aria-label='Due within 48 hours tasks'
+              >
+                <Badge badgeContent={17} color='secondary'>
+                  <AssignmentIcon className={classes.three_days} />
+                </Badge>
+              </Tooltip>
+            </IconButton>
+            <IconButton aria-label='show 4 new mails' color='inherit'>
+              <Tooltip title='Not due yet tasks' aria-label='Not due yet tasks'>
+                <Badge badgeContent={4} color='secondary'>
+                  <AssignmentIcon className={classes.notdue} />
+                </Badge>
+              </Tooltip>
             </IconButton>
             <IconButton
               edge='end'

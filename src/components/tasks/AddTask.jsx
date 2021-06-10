@@ -8,7 +8,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core/styles'
-import Tooltip from '@material-ui/core/Tooltip'
+// import Tooltip from '@material-ui/core/Tooltip'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -19,41 +19,47 @@ const useStyles = makeStyles((theme) => ({
   list_text: {
     cursor: 'pointer',
     fontSize: '15px',
-    width: '75px'
   },
   menu: {
     display: 'flex',
     alignItems: 'center',
-  },
+  }
 }))
 
 
 export default function AddTask(props) {
-    // const { openTasksDrawer, toggleTasksDrawer } = props
+    const { openTasksDrawer } = props
     const [selectedOption, setSelectedOption] = useState('Created')
     const classes = useStyles()
 
 
     return (
       <List>
-        {[{ title: 'Created', icon: <Add /> }].map(({ title, icon }, index) => (
-          <ListItem
-            key={index}
-            // onClick={() => toggleTasksDrawer(!openTasksDrawer)}
-            // onKeyDown={() => toggleTasksDrawer(!openTasksDrawer)}
-          >
-            <CreatedMenu onOptionSelected={option => setSelectedOption(option)}>
-              <ListItemText className={classes.list_text} primary={selectedOption} />
-              <ListItemIcon>
-                <ExpandMore />
-              </ListItemIcon>
-            </CreatedMenu>
+        {openTasksDrawer && [{ title: 'Created', icon: <Add /> }].map(
+          ({ title, icon }, index) => (
+            <ListItem
+              key={index}
+              // onClick={() => toggleTasksDrawer(!openTasksDrawer)}
+              // onKeyDown={() => toggleTasksDrawer(!openTasksDrawer)}
+            >
+              <CreatedMenu
+                onOptionSelected={(option) => setSelectedOption(option)}
+              >
+                <ListItemText
+                  className={classes.list_text}
+                  primary={selectedOption}
+                />
+                <ListItemIcon>
+                  <ExpandMore />
+                </ListItemIcon>
+              </CreatedMenu>
 
-            <Tooltip title='Add task'>
+              {/* <Tooltip title='Add task'>
               <ListItemIcon  className={classes.list_icon}>{icon}</ListItemIcon>
-            </Tooltip>
-          </ListItem>
-        ))}
+            </Tooltip> */}
+            </ListItem>
+          )
+        )}
       </List>
     )
 }

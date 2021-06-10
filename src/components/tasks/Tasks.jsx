@@ -73,7 +73,7 @@ export default function TasksFilter(props) {
         size='small'
       />
       {openTasksDrawer && ['All Tasks (9)', 'Filter 1', 'Filter 2'].map((text, index) => (
-        <TaskListItem openTasksDrawer={openTasksDrawer} toggleTasksDrawer={toggleTasksDrawer} selected={index === 1 ? true:false} />
+        <TaskListItem key={index} openTasksDrawer={openTasksDrawer} toggleTasksDrawer={toggleTasksDrawer} selected={index === 1 ? true:false} />
       ))}
     </List>
   )

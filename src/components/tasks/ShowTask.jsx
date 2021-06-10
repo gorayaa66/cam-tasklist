@@ -116,7 +116,7 @@ const TaskTabs = (props) => {
     const { selectedTab, onSelectTab } = props
     return (
         <div className={classes.tabs_cont}>
-            {['Form', 'History', 'Diagram', 'Description'].map((tab) => <div className={selectedTab === tab? classes.selected_tab :classes.tab} onClick={() => onSelectTab(tab)}>{tab}</div>)}
+            {['Form', 'History', 'Diagram', 'Description'].map((tab, index) => <div key={index} className={selectedTab === tab? classes.selected_tab :classes.tab} onClick={() => onSelectTab(tab)}>{tab}</div>)}
         </div>
     )
 }
