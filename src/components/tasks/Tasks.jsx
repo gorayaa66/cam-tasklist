@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     '&:hover': {
-      color: 'blue !important',
+      color: `${theme.palette.primary.main} !important`,
     },
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'flex-start',
@@ -26,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     '&:hover': {
-      borderLeft: '2px solid blue',
+      borderLeft: `2px solid ${theme.palette.primary.main}`,
     },
   },
   selected_list_item: {
     display: 'flex',
     justifyContent: 'space-between',
-    borderLeft: '2px solid red'
+    borderLeft: `2px solid ${theme.palette.secondary.main}`,
   },
   textField: {
     width: '250px',

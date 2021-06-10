@@ -10,7 +10,10 @@ import Menu from '@material-ui/core/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MoreIcon from '@material-ui/icons/MoreVert'
 import TelegramIcon from '@material-ui/icons/Telegram'
+import AddIcon from '@material-ui/icons/Add'
+
 import AssignmentIcon from '@material-ui/icons/Assignment'
+import NotificationsIcon from '@material-ui/icons/Notifications'
 import { Button, Tooltip } from '@material-ui/core'
 import {useHistory} from 'react-router-dom'
 
@@ -20,12 +23,14 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 100,
+    background: '#081c44',
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     display: 'none',
+    cursor: 'pointer',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -80,14 +85,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   overdue: {
-    color: 'red'
+    color: 'red',
   },
   three_days: {
-    color: 'yellow'
+    color: 'yellow',
   },
   notdue: {
-    color: 'green'
-  }
+    color: 'green',
+  },
 }))
 
 export default function AuthenticatedNavbar(props) {
@@ -150,6 +155,14 @@ export default function AuthenticatedNavbar(props) {
       <MenuItem>
         <IconButton aria-label='show 4 new mails' color='inherit'>
           <Badge badgeContent={4} color='secondary'>
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton aria-label='show 4 new mails' color='inherit'>
+          <Badge badgeContent={4} color='secondary'>
             <AssignmentIcon className={classes.overdue} />
           </Badge>
         </IconButton>
@@ -198,7 +211,12 @@ export default function AuthenticatedNavbar(props) {
           >
             <TelegramIcon />
           </IconButton>
-          <Typography className={classes.title} variant='h6' noWrap>
+          <Typography
+            className={classes.title}
+            variant='h6'
+            noWrap
+            onClick={() => history.push('/')}
+          >
             Tasklist
           </Typography>
 
@@ -217,11 +235,21 @@ export default function AuthenticatedNavbar(props) {
           </div> */}
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Button color='inherit' onClick={() => history.push("/process/list")}>
-                Start process
+            <Button
+              color='inherit'
+              onClick={() => history.push('/process/list')}
+            >
+              <AddIcon/> Start process
             </Button>
             <IconButton aria-label='show 4 new mails' color='inherit'>
-              <Tooltip title='Overdue tasks' aria-label='Overdue tasks'>
+              <Tooltip title='Notifications' aria-label='Overdue'>
+                <Badge badgeContent={4} color='secondary'>
+                  <NotificationsIcon />
+                </Badge>
+              </Tooltip>
+            </IconButton>
+            <IconButton aria-label='show 4 new mails' color='inherit'>
+              <Tooltip title='Overdue' aria-label='Overdue'>
                 <Badge badgeContent={4} color='secondary'>
                   <AssignmentIcon className={classes.overdue} />
                 </Badge>
@@ -229,8 +257,8 @@ export default function AuthenticatedNavbar(props) {
             </IconButton>
             <IconButton aria-label='show 17 new notifications' color='inherit'>
               <Tooltip
-                title='Due within 48 hours tasks'
-                aria-label='Due within 48 hours tasks'
+                title='Due within 48 hours'
+                aria-label='Due within 48 hours'
               >
                 <Badge badgeContent={17} color='secondary'>
                   <AssignmentIcon className={classes.three_days} />
@@ -238,7 +266,7 @@ export default function AuthenticatedNavbar(props) {
               </Tooltip>
             </IconButton>
             <IconButton aria-label='show 4 new mails' color='inherit'>
-              <Tooltip title='Not due yet tasks' aria-label='Not due yet tasks'>
+              <Tooltip title='Not due yet' aria-label='Not due yet'>
                 <Badge badgeContent={4} color='secondary'>
                   <AssignmentIcon className={classes.notdue} />
                 </Badge>

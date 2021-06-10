@@ -1,10 +1,10 @@
 import React from 'react'
-import {
-  createMuiTheme,
-  ThemeProvider,
-} from '@material-ui/core/styles'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { red } from '@material-ui/core/colors'
 
+const primaryColor = '#0071dc'
+const secondaryColor = '#ffc220'
+const textColor = '#fff'
 
 const theme = createMuiTheme({
   status: {
@@ -14,10 +14,33 @@ const theme = createMuiTheme({
     button: {
       textTransform: 'none',
     },
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
   },
-  //   palette: {
-  //       primary: red
-  //   }
+  palette: {
+    primary: {
+      light: primaryColor,
+      main: primaryColor,
+      dark: primaryColor,
+      contrastText: textColor,
+    },
+    secondary: {
+      light: secondaryColor,
+      main: secondaryColor,
+      dark: secondaryColor,
+      contrastText: textColor,
+    },
+  },
 })
 
 export default function Theme({ children }) {

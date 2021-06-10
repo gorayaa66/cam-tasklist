@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     '&:hover': {
-      color: 'blue !important',
+      color: `${theme.palette.primary.main} !important`,
     },
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'flex-start',
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row-reverse',
     '&:hover': {
-      borderLeft: '2px solid blue',
+      borderLeft: `2px solid ${theme.palette.primary.main}`,
     },
   },
 }))

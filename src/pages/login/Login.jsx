@@ -51,7 +51,7 @@ export default function Login() {
         size='small'
         type='password'
       />
-      <Button className={classes.button} variant='contained' color='primary' size="large" onClick={() => history.push("/")}>
+      <Button className={classes.button} variant='contained' color='secondary' size="large" onClick={() => history.push("/")}>
         Log in
       </Button>
     </div>

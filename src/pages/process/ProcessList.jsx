@@ -9,8 +9,7 @@ import FolderIcon from '@material-ui/icons/Folder'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import Collapse from '@material-ui/core/Collapse'
-import GroupWorkIcon from '@material-ui/icons/GroupWork'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   list_cont: {
@@ -41,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   list_item_left: {
     display: 'flex',
     justifyContent: 'space-between',
-    width: '70%',
+    width: '95%',
     cursor: 'pointer',
   },
   expand: {
@@ -51,44 +50,42 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProcessList() {
   const classes = useStyles()
-    const history = useHistory()
+  const history = useHistory()
   return (
     <div className={classes.list_cont}>
       <List className={classes.root}>
         <Typography className={classes.heading} variant='h6' noWrap>
-          All Processes
+          Select a process to start
         </Typography>
-        {/* <ProcessListHead /> */}
-        
+        <ProcessListHead />
+
         {[0, 1, 2, 3].map((value, index) => {
-          return <ProcessListItem key={index} onProcessClicked={() => history.push(`/process/start/${index}`)} />
+          return (
+            <ProcessListItem
+              key={index}
+              onProcessClicked={() => history.push(`/process/start/${index}`)}
+            />
+          )
         })}
       </List>
     </div>
   )
 }
 
-// const ProcessListHead = () => {
-//   const classes = useState()
-//   return (
-//     <ListItem
-//       dense
-//       // onClick={handleToggle(value)}
-//       className={classes.list_item_head}
-//     >
-//       {/* <ListItemIcon>
-//         <FolderIcon />
-//       </ListItemIcon> */}
-//       <ListItemText primary={`Name`} />
-//       <ListItemText primary={`Content`} />
-//       <ListItemText primary={`Last Updated`} />
-//       <ListItemText primary={`Collaborators`} />
-//     </ListItem>
-//   )
-// }
+const ProcessListHead = () => {
+  const classes = useState()
+  return (
+    <ListItem dense className={classes.list_item_head}>
+      <ListItemIcon></ListItemIcon>
+      <ListItemText primary={`Process`} />
+      <ListItemText primary={`Created`} />
+      <ListItemText primary={`Updated`} />
+    </ListItem>
+  )
+}
 
 const ProcessListItem = (props) => {
-    const { onProcessClicked } = props
+  const { onProcessClicked } = props
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   return (
@@ -98,7 +95,10 @@ const ProcessListItem = (props) => {
         // onClick={handleToggle(value)}
         className={classes.list_item}
       >
-        <div className={classes.list_item_left} onClick={() => onProcessClicked()}>
+        <div
+          className={classes.list_item_left}
+          onClick={() => onProcessClicked()}
+        >
           <ListItemIcon>
             <FolderIcon />
           </ListItemIcon>
@@ -108,13 +108,10 @@ const ProcessListItem = (props) => {
             <CommentIcon />
           </IconButton>
         </ListItemSecondaryAction> */}
-          <ListItemText primary='3 diagrams' />
+          <ListItemText primary='22-12-2021' />
+          <ListItemText primary='23-12-2021' />
         </div>
-        <ListItemText primary='23-12-2021' />
 
-        <ListItemIcon>
-          <GroupWorkIcon />
-        </ListItemIcon>
         {open ? (
           <ExpandLess
             className={classes.expand}

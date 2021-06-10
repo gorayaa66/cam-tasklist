@@ -11,6 +11,11 @@ export default function Home() {
   const [openTasksDrawer, setOpenTasksDrawer] = useState(true)
   const [openFilterDrawer, setOpenFilterDrawer] = useState(true)
 
+  const toggleDrawers = (val) => {
+    setOpenFilterDrawer(val)
+    setOpenTasksDrawer(val)
+  }
+
   return (
     <div>
       <AppDrawer
@@ -45,7 +50,11 @@ export default function Home() {
             />
           }
         >
-          <ShowTask />
+          <ShowTask
+            openTasksDrawer={openTasksDrawer}
+            openFilterDrawer={openFilterDrawer}
+            onToggleDrawers={toggleDrawers}
+          />
         </AppDrawer>
       </AppDrawer>
     </div>

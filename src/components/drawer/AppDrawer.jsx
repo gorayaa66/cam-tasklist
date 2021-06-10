@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     // padding: theme.spacing(3),
-    marginTop: '10px',
+    marginTop: '4px',
   },
   list_item: {
     display: 'flex',
@@ -127,7 +127,10 @@ export default function AppDrawer(props) {
       >
         <div className={classes.toolbar}>
           {head}
-          <IconButton onClick={handleDrawerToggle} className={!openDrawer?classes.icon:{}}>
+          <IconButton
+            onClick={handleDrawerToggle}
+            className={!openDrawer ? classes.icon : {}}
+          >
             {!openDrawer ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>

@@ -7,6 +7,13 @@ import NotificationsIcon from '@material-ui/icons/Notifications'
 import AppsIcon from '@material-ui/icons/Apps'
 import PersonIcon from '@material-ui/icons/Person'
 import Tooltip from '@material-ui/core/Tooltip'
+import Divider from '@material-ui/core/Divider'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import FullscreenExitIcon from '@material-ui/icons/FullscreenExit'
+import FullscreenIcon from '@material-ui/icons/Fullscreen'
+
 
 const useStyles = makeStyles((theme) => ({
   task_container: {
@@ -25,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     '&:hover': {
-      borderLeft: '2px solid blue',
+      borderLeft: `2px solid ${theme.palette.primary.main}`,
     },
   },
   btn_link_cont: {
@@ -37,10 +44,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     cursor: 'pointer',
     '&:hover': {
-      color: 'blue',
+      color: `${theme.palette.primary.main}`,
     },
     [theme.breakpoints.down('md')]: {
-      fontSize: '12px'
+      fontSize: '12px',
     },
   },
   icon: {
@@ -50,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '12px',
     cursor: 'pointer',
     '&:hover': {
-      color: 'blue',
+      color: `${theme.palette.primary.main}`,
     },
     margin: '0px 5px',
   },
@@ -78,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     '&:hover': {
-      borderBottom: '2px solid blue',
+      borderBottom: `2px solid ${theme.palette.primary.main}`,
     },
   },
   selected_tab: {
@@ -92,22 +99,64 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     borderBottom: '2px solid red',
   },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+  close_drawer: {
+    cursor: 'pointer',
+  },
 }))
 
-export default function ShowTask() {
+export default function ShowTask(props) {
+  const { onToggleDrawers, openTasksDrawer, openFilterDrawer } = props
   const classes = useStyles()
   const [selectedTab, setSelectedTab] = useState('Form')
   return (
-    <div className={classes.task_container}>
-      <TaskHeader />
-      <div className={classes.btn_row}>
-        <LinkButton  text={'Set follow-up date'} icon={<TodayIcon/>} />
-        <LinkButton text={'Set due date'} icon={<NotificationsIcon />} />
-        <LinkButton text={'Set follow-up date'} icon={<AppsIcon />} />
-        <LinkButton text={'username'} icon={<PersonIcon />} close />
+    <>
+      <List>
+        {!openTasksDrawer && !openFilterDrawer ? (
+          <ListItem
+            className={classes.close_drawer}
+            onClick={() => onToggleDrawers(true)}
+          >
+            <Tooltip title='Open'>
+              <ListItemIcon className={classes.list_icon}>
+                <FullscreenIcon />
+              </ListItemIcon>
+            </Tooltip>
+          </ListItem>
+        ) : (
+          <ListItem
+            className={classes.close_drawer}
+            onClick={() => onToggleDrawers(false)}
+          >
+            <Tooltip title='Close'>
+              <ListItemIcon className={classes.list_icon}>
+                <FullscreenExitIcon />
+              </ListItemIcon>
+            </Tooltip>
+          </ListItem>
+        )}
+      </List>
+      <Divider />
+      <div className={classes.task_container}>
+        <TaskHeader />
+        <div className={classes.btn_row}>
+          <LinkButton text={'Set follow-up date'} icon={<TodayIcon />} />
+          <LinkButton text={'Set due date'} icon={<NotificationsIcon />} />
+          <LinkButton text={'Set follow-up date'} icon={<AppsIcon />} />
+          <LinkButton text={'username'} icon={<PersonIcon />} close />
+        </div>
+        <TaskTabs
+          selectedTab={selectedTab}
+          onSelectTab={(tab) => setSelectedTab(tab)}
+        />
       </div>
-      <TaskTabs selectedTab={selectedTab} onSelectTab={tab => setSelectedTab(tab)} />
-    </div>
+    </>
   )
 }
 

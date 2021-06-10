@@ -14,19 +14,28 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   textField: {
-    width: '400px',
+    width: '95%',
     margin: '10px 0px',
   },
   button: {
-    width: '400px',
+    width: '100px',
     margin: '10px 0px',
+  },
+  button_cont: {
+    width: '95%',
+  },
+  heading_cont: {
+    width: '95%',
   },
   [theme.breakpoints.down('sm')]: {
     textField: {
-      width: '90%',
+      width: '95%',
     },
-    button: {
-      width: '90%',
+    button_cont: {
+      width: '100px',
+    },
+    heading_cont: {
+      width: '200px',
     },
   },
 }))
@@ -39,7 +48,9 @@ export default function StartProcess() {
 
   return (
     <div className={classes.login_cont}>
-      <Typography variant='h5'>Start process {pid}</Typography>
+      <div className={classes.heading_cont}>
+        <Typography variant='h5'>Start process {pid}</Typography>
+      </div>
       <TextField
         className={classes.textField}
         label='First name'
@@ -57,23 +68,28 @@ export default function StartProcess() {
         label='Email'
         variant='outlined'
         size='small'
-        type="email"
+        type='email'
       />
       <TextField
         className={classes.textField}
         label='Items'
         variant='outlined'
         size='small'
+        multiline
+        rows={4}
+        rowsMax={6}
       />
-      <Button
-        className={classes.button}
-        variant='contained'
-        color='primary'
-        size='large'
-        onClick={() => history.push('/')}
-      >
-        Submit
-      </Button>
+      <div className={classes.button_cont}>
+        <Button
+          className={classes.button}
+          variant='contained'
+          color='primary'
+          size='large'
+          onClick={() => history.push('/')}
+        >
+          Submit
+        </Button>
+      </div>
     </div>
   )
 }
