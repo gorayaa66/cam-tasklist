@@ -1,4 +1,4 @@
-/* body {
+body {
   margin: 0;
   font-family: Bogle, Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   -webkit-font-smoothing: antialiased;
@@ -8,12 +8,6 @@
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-} */
-
-
-@font-face {
-  font-family: 'Bogle';
-  src: local('Bogle'), url(./assets/fonts/Bogle/Bogle-Black.otf) format('otf');
-  /* other formats include: 'woff2', 'truetype, 'opentype',
-                            'embedded-opentype', and 'svg' */
 }
+
+

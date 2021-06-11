@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     background: '#081c44',
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    // marginRight: theme.spacing(2),
   },
   title: {
     display: 'none',
@@ -92,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
   },
   notdue: {
     color: 'green',
+  },
+  start_process_btn: {
+    border: `1px solid ${theme.palette.primary.contrastText}`,
   },
 }))
 
@@ -237,6 +240,7 @@ export default function AuthenticatedNavbar(props) {
           <div className={classes.sectionDesktop}>
             <Button
               color='inherit'
+              className={classes.start_process_btn}
               onClick={() => history.push('/process/list')}
             >
               <AddIcon/> Start process

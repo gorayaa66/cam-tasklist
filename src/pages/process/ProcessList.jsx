@@ -4,12 +4,12 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import { Typography } from '@material-ui/core'
-import FolderIcon from '@material-ui/icons/Folder'
+import { Button, Typography } from '@material-ui/core'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import Collapse from '@material-ui/core/Collapse'
 import { useHistory } from 'react-router-dom'
+import AccountTreeIcon from '@material-ui/icons/AccountTree'
 
 const useStyles = makeStyles((theme) => ({
   list_cont: {
@@ -35,13 +35,24 @@ const useStyles = makeStyles((theme) => ({
   list_item_head: {
     display: 'flex',
     justifyContent: 'flex-end',
-    border: '1px solid red',
   },
   list_item_left: {
     display: 'flex',
     justifyContent: 'space-between',
-    width: '95%',
+    width: '60%',
     cursor: 'pointer',
+    [theme.breakpoints.down('sm')]: {
+      width: '45%',
+    },
+  },
+  list_item_head_left: {
+    width: '60%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    cursor: 'pointer',
+    [theme.breakpoints.down('sm')]: {
+      width: '45%',
+    },
   },
   expand: {
     cursor: 'pointer',
@@ -73,13 +84,16 @@ export default function ProcessList() {
 }
 
 const ProcessListHead = () => {
-  const classes = useState()
+  const classes = useStyles()
   return (
     <ListItem dense className={classes.list_item_head}>
-      <ListItemIcon></ListItemIcon>
-      <ListItemText primary={`Process`} />
+      <div className={classes.list_item_head_left}>
+        <ListItemIcon></ListItemIcon>
+        <ListItemText primary={`Process`} />
+      </div>
       <ListItemText primary={`Created`} />
       <ListItemText primary={`Updated`} />
+      <div style={{width: '90px'}}></div>
     </ListItem>
   )
 }
@@ -100,7 +114,7 @@ const ProcessListItem = (props) => {
           onClick={() => onProcessClicked()}
         >
           <ListItemIcon>
-            <FolderIcon />
+            <AccountTreeIcon />
           </ListItemIcon>
           <ListItemText primary={`Line item ${1}`} />
           {/* <ListItemSecondaryAction>
@@ -108,21 +122,29 @@ const ProcessListItem = (props) => {
             <CommentIcon />
           </IconButton>
         </ListItemSecondaryAction> */}
-          <ListItemText primary='22-12-2021' />
-          <ListItemText primary='23-12-2021' />
         </div>
-
-        {open ? (
-          <ExpandLess
-            className={classes.expand}
-            onClick={() => setOpen(!open)}
-          />
-        ) : (
-          <ExpandMore
-            className={classes.expand}
-            onClick={() => setOpen(!open)}
-          />
-        )}
+        <ListItemText primary='12-26-2021' />
+        <ListItemText primary='12-27-2021' />
+        <Button
+          className={classes.button}
+          variant='contained'
+          color='primary'
+          size='small'
+          onClick={() => setOpen(!open)}
+        >
+          preview
+          {open ? (
+            <ExpandLess
+              className={classes.expand}
+              onClick={() => setOpen(!open)}
+            />
+          ) : (
+            <ExpandMore
+              className={classes.expand}
+              onClick={() => setOpen(!open)}
+            />
+          )}
+        </Button>
       </ListItem>
       <Collapse in={open} timeout='auto' unmountOnExit>
         <List component='div' disablePadding>

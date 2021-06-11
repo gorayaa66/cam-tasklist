@@ -9,7 +9,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 
-const drawerWidth = 270
+const drawerWidth = 300
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +51,10 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
     whiteSpace: 'nowrap',
     marginRight: '3px',
+  },
+  customDrawerWidth: {
+    // background: 'red',
+    maxWidth: '240px'
   },
   drawerOpen: {
     width: drawerWidth,
@@ -100,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function AppDrawer(props) {
-  const { openDrawer, onToggleDrawer,head, content, children } = props
+  const { openDrawer, onToggleDrawer,head, content, children, small } = props
 
   const classes = useStyles()
 
@@ -117,11 +121,13 @@ export default function AppDrawer(props) {
         className={clsx(classes.drawer, {
           [classes.drawerOpen]: openDrawer,
           [classes.drawerClose]: !openDrawer,
+          [small? classes.customDrawerWidth : {}]: openDrawer,
         })}
         classes={{
           paper: clsx({
             [classes.drawerOpen]: openDrawer,
             [classes.drawerClose]: !openDrawer,
+            [small? classes.customDrawerWidth: {}]: openDrawer,
           }),
         }}
       >

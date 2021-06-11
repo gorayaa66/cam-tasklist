@@ -115,15 +115,26 @@ export default function ShowTask(props) {
   const { onToggleDrawers, openTasksDrawer, openFilterDrawer } = props
   const classes = useStyles()
   const [selectedTab, setSelectedTab] = useState('Form')
+  const [showTooltip, setShowTooltip] = React.useState(false)
+
   return (
     <>
       <List>
         {!openTasksDrawer && !openFilterDrawer ? (
           <ListItem
             className={classes.close_drawer}
-            onClick={() => onToggleDrawers(true)}
+            onClick={() => {
+              setShowTooltip(false)
+              onToggleDrawers(true)
+            }}
           >
-            <Tooltip title='Open'>
+            <Tooltip
+              title='Open'
+              open={showTooltip}
+              disableHoverListener
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+            >
               <ListItemIcon className={classes.list_icon}>
                 <FullscreenIcon />
               </ListItemIcon>
@@ -132,9 +143,18 @@ export default function ShowTask(props) {
         ) : (
           <ListItem
             className={classes.close_drawer}
-            onClick={() => onToggleDrawers(false)}
+            onClick={() => {
+              setShowTooltip(false)
+              onToggleDrawers(false)
+            }}
           >
-            <Tooltip title='Close'>
+            <Tooltip
+              title='Close'
+              open={showTooltip}
+              disableHoverListener
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+            >
               <ListItemIcon className={classes.list_icon}>
                 <FullscreenExitIcon />
               </ListItemIcon>

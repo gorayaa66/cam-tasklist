@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Bogle';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./BOGLEREGULAR.OTF');
+}
+
+@font-face {
+  font-family: 'Bogle-Black';
+  font-weight: normal;
+  font-style: normal;
+  src: url('./Bogle-Black.otf');
+}

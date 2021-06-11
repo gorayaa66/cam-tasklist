@@ -19,6 +19,7 @@ export default function Home() {
   return (
     <div>
       <AppDrawer
+        small
         openDrawer={openFilterDrawer}
         onToggleDrawer={(val) => setOpenFilterDrawer(val)}
         head={
